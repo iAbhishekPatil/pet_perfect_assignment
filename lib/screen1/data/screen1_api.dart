@@ -6,7 +6,7 @@ class Screen1API {
   final Dio _dio;
 
   Future<Screen1Model> fetchImage() async {
-    final response = await _dio.get(ApiConst.image);
-    return screen1ModelFromJson(jsonEncode(response.data));
+    final response = await _dio.get<String>(ApiConst.image);
+    return screen1ModelFromJson(response.data ?? '');
   }
 }

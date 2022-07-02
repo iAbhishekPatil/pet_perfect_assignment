@@ -22,7 +22,7 @@ class Screen1Page extends StatelessWidget {
 }
 
 class _Screen1View extends StatelessWidget {
-  const _Screen1View({super.key});
+  const _Screen1View();
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +84,7 @@ class _Screen1View extends StatelessWidget {
 }
 
 class _Screen1Image extends StatelessWidget {
-  const _Screen1Image({super.key, required this.url});
+  const _Screen1Image({required this.url});
 
   final String url;
 
@@ -113,10 +113,7 @@ class _Screen1Image extends StatelessWidget {
 }
 
 class _Screen1Video extends StatefulWidget {
-  const _Screen1Video({
-    super.key,
-    required this.url,
-  });
+  const _Screen1Video({required this.url});
 
   final String url;
 

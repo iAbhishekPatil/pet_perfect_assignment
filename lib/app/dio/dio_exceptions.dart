@@ -23,17 +23,16 @@ abstract class DioExceptions {
         );
       case DioErrorType.sendTimeout:
         return 'Send timeout in connection with API server';
-      default:
-        return 'Something went wrong';
     }
   }
 
   static String _handleError(int statusCode, dynamic error) {
+    final responseData = error as Map<String, dynamic>;
     switch (statusCode) {
       case 400:
-        return error?['message']?.toString() ?? '400 - Bad request';
+        return responseData['message']?.toString() ?? '400 - Bad request';
       case 404:
-        return error?['message']?.toString() ?? '404 - Not found';
+        return responseData['message']?.toString() ?? '404 - Not found';
       case 500:
         return '500 - Internal server error';
       default:
