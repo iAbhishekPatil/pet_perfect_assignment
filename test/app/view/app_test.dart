@@ -1,19 +1,12 @@
-// Copyright (c) 2022, Very Good Ventures
-// https://verygood.ventures
-//
-// Use of this source code is governed by an MIT-style
-// license that can be found in the LICENSE file or at
-// https://opensource.org/licenses/MIT.
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pet_perfect_assignment/app/app.dart';
-import 'package:pet_perfect_assignment/counter/counter.dart';
+import 'package:pet_perfect_assignment/screen1/view/screen1_page.dart';
 
 void main() {
   group('App', () {
-    testWidgets('renders CounterPage', (tester) async {
+    testWidgets('renders Screen1Page', (tester) async {
       await tester.pumpWidget(const App());
-      expect(find.byType(CounterPage), findsOneWidget);
+      expect(find.byType(Screen1Page), findsOneWidget);
     });
   });
 }

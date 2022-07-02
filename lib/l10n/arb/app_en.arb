@@ -1,7 +1,11 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+    "screen1AppBarTitle": "Screen 1",
+    "@screen1AppBarTitle": {
+        "description": "Text shown in the AppBar of the Screen 2 Page"
+    },
+    "screen2AppBarTitle": "Screen 2",
+    "@screen2AppBarTitle": {
+        "description": "Text shown in the AppBar of the Screen 2 Page"
     }
 }
