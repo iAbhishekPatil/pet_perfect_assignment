@@ -17,10 +17,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
+        appBarTheme:
+            const AppBarTheme(color: Color.fromARGB(255, 117, 58, 127)),
         colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
+          accentColor: const Color.fromARGB(255, 117, 58, 127),
         ),
+        backgroundColor: const Color.fromARGB(255, 250, 200, 255),
       ),
       localizationsDelegates: const [
         AppLocalizations.delegate,
