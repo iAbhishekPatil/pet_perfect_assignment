@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:pet_perfect_assignment/app/dio/dio.dart';
 import 'package:pet_perfect_assignment/screen1/data/screen1_api.dart';
 
 part 'screen1_event.dart';
@@ -28,8 +28,16 @@ class Screen1Bloc extends Bloc<Screen1Event, Screen1State> {
 
       // emit success
       emit(Screen1StateSuccess(data.url));
+    } on DioError catch (e) {
+      final errorMsg = DioExceptions.errorString(e);
+      log(
+        'Error in screen1data loading',
+        error: errorMsg,
+        stackTrace: StackTrace.current,
+      );
+      emit(Screen1StateFailure(errorMsg));
     } catch (e, st) {
-      log(e.toString(), stackTrace: st);
+      log('Error in screen1data loading', error: e, stackTrace: st);
       emit(Screen1StateFailure(e.toString()));
     }
   }

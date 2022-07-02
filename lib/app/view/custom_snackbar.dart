@@ -16,9 +16,12 @@ abstract class CustomSnackBar {
         children: [
           Icon(icon),
           const SizedBox(width: 5),
-          Text(
-            text,
-            style: const TextStyle(color: Colors.black),
+          Expanded(
+            child: Text(
+              text,
+              softWrap: true,
+              style: const TextStyle(color: Colors.black),
+            ),
           ),
         ],
       ),
