@@ -5,6 +5,8 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:pet_perfect_assignment/screen1/data/screen1_storage_helper.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -36,7 +38,11 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   await runZonedGuarded(
     () async {
       await BlocOverrides.runZoned(
-        () async => runApp(await builder()),
+        () async {
+          await Hive.initFlutter();
+          await Hive.openBox(Screen1StorageHelper.boxName);
+          runApp(await builder());
+        },
         blocObserver: AppBlocObserver(),
       );
     },

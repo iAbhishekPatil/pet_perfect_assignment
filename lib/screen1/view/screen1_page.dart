@@ -6,6 +6,7 @@ import 'package:pet_perfect_assignment/app/view/custom_snackbar.dart';
 import 'package:pet_perfect_assignment/l10n/l10n.dart';
 import 'package:pet_perfect_assignment/screen1/bloc/screen1_bloc.dart';
 import 'package:pet_perfect_assignment/screen1/data/screen1_api.dart';
+import 'package:pet_perfect_assignment/screen1/data/screen1_storage_helper.dart';
 import 'package:pet_perfect_assignment/screen2/view/screen2_page.dart';
 import 'package:video_player/video_player.dart';
 
@@ -80,16 +81,25 @@ class _Screen1View extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute<void>(
-              builder: (context) => const Screen2Page(),
-            ),
-          );
+      floatingActionButton: BlocBuilder<Screen1Bloc, Screen1State>(
+        builder: (context, state) {
+          if (state is Screen1StateSuccess) {
+            return FloatingActionButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                Screen1StorageHelper.storeURL(url: state.imageUrl);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (context) => const Screen2Page(),
+                  ),
+                );
+              },
+              child: const Icon(Icons.chevron_right),
+            );
+          }
+          return Container();
         },
-        child: const Icon(Icons.chevron_right),
       ),
     );
   }
