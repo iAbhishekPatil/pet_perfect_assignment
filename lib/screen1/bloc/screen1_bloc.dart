@@ -9,11 +9,13 @@ part 'screen1_event.dart';
 part 'screen1_state.dart';
 
 class Screen1Bloc extends Bloc<Screen1Event, Screen1State> {
-  Screen1Bloc({required this.api}) : super(Screen1StateInitial()) {
+  Screen1Bloc({required Screen1API api})
+      : _api = api,
+        super(Screen1StateInitial()) {
     on<Screen1LoadData>(_onScreen1LoadData);
   }
 
-  final Screen1API api;
+  final Screen1API _api;
 
   Future<FutureOr<void>> _onScreen1LoadData(
     Screen1LoadData event,
@@ -24,11 +26,12 @@ class Screen1Bloc extends Bloc<Screen1Event, Screen1State> {
 
     try {
       // api call
-      final data = await api.fetchImage();
+      final data = await _api.fetchImage();
 
       // emit success
       emit(Screen1StateSuccess(data.url));
     } on DioError catch (e) {
+      // emit dio network error
       final errorMsg = DioExceptions.errorString(e);
       log(
         'Error in screen1data loading',
@@ -37,6 +40,7 @@ class Screen1Bloc extends Bloc<Screen1Event, Screen1State> {
       );
       emit(Screen1StateFailure(errorMsg));
     } catch (e, st) {
+      //emit app error
       log('Error in screen1data loading', error: e, stackTrace: st);
       emit(Screen1StateFailure(e.toString()));
     }
